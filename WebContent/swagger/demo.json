@@ -1,0 +1,146 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "大家可以在此页面做服务端接口的测试啦",
+        "title": "项目测试页"
+    },
+    "tags": [
+        {
+            "name": "超级微信",
+            "description": "所有接口",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "store",
+            "description": "访问宠物商店订单！"
+        },
+        {
+            "name": "user",
+            "description": "操作用户相关！",
+            "externalDocs": {
+                "description": "Find out more about our store",
+                "url": "http://swagger.io"
+            }
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/pet": {
+            "post": {
+                "tags": [
+                    "pet"
+                ],
+                "summary": "添加一个新宠物到商店！",
+                "description": "",
+				"author": "cloudream",
+                "operationId": "addPet",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/SuperWeChatServerV2.0/Server": {
+            "get": {
+                "tags": [
+                    "pet"
+                ],
+                "summary": "根据状态查找宠物",
+                "description": "Multiple status values can be provided with comma seperated strings",
+				"author": "cloudream",
+                "operationId": "findPetsByStatus",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_group_id",
+                        "in": "query",
+                        "description": "必填",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Pet"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "petstore_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "http://petstore.swagger.io/api/oauth/dialog",
+            "flow": "implicit",
+            "scopes": {
+                "write:pets": "modify pets in your account",
+                "read:pets": "read your pets"
+            }
+        },
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    }
+}

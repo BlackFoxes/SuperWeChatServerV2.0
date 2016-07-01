@@ -17,7 +17,7 @@ import cn.ucai.superwechat.pojo.User;
 import cn.ucai.superwechat.utils.JsonUtil;
 import cn.ucai.superwechat.utils.Utils;
 
-@WebServlet("/openapi")
+@WebServlet("/Server")
 public class Server extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ISuperWeChatBiz biz;

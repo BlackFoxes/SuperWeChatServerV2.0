@@ -53,8 +53,10 @@ public interface ISuperWeChatBiz {
 	 * @param nameOrHxid
 	 * @param avatarType
 	 * @param response
+	 * @param width:图片的宽度
+	 * @param height:图片的高度
 	 */
-	void downAvatar(String nameOrHxid, String avatarType, HttpServletResponse response);
+	void downAvatar(String nameOrHxid, String avatarType, HttpServletResponse response,String width,String height);
 	/**
 	 * 更新头像
 	 * @param nameOrHxid

@@ -25,6 +25,7 @@ import cn.ucai.superwechat.pojo.Group;
 import cn.ucai.superwechat.pojo.Location;
 import cn.ucai.superwechat.pojo.User;
 import cn.ucai.superwechat.servlet.I;
+import cn.ucai.superwechat.utils.ImageUtil;
 import cn.ucai.superwechat.utils.PropertiesUtils;
 
 public class SuperWeChatBizImpl implements ISuperWeChatBiz{
@@ -188,38 +189,15 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 		return result;
 	}
 	@Override
-	public void downAvatar(String nameOrHxid, String avatarType, HttpServletResponse response) {
+	public void downAvatar(String nameOrHxid, String avatarType, HttpServletResponse response,String width,String height) {
 		// 1、从文件中读
 		// 2、将读到的内容写入到客户端
 		response.setContentType("image/jpeg"); // MIME
 		File file = new File(PropertiesUtils.getValue("avatar_path","path.properties")+avatarType+"/",nameOrHxid+I.AVATAR_SUFFIX_JPG);
-		FileInputStream fis = null;
-		OutputStream os = null;
 		try {
-			fis = new FileInputStream(file);
-			os = response.getOutputStream();
-			byte[] byArr = new byte[1024*4];
-			int b = 0;
-			while((b=fis.read(byArr))!=-1){
-				os.write(byArr, 0, b);
-			}
+			ImageUtil.zoom(file.getPath(), response.getOutputStream(), Integer.parseInt(width), Integer.parseInt(height));
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally{
-			if(fis!=null){
-				try {
-					fis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if(os!=null){
-				try {
-					os.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 	/**

@@ -1,7 +1,6 @@
 package cn.ucai.superwechat.servlet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import cn.ucai.superwechat.pojo.User;
 import cn.ucai.superwechat.utils.JsonUtil;
 import cn.ucai.superwechat.utils.Utils;
 
-@WebServlet("/Server")
+@WebServlet("/openapi")
 public class Server extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ISuperWeChatBiz biz;
@@ -447,8 +446,10 @@ public class Server extends HttpServlet {
 		// 1、接收参数
 		String nameOrHxid = request.getParameter(I.NAME_OR_HXID);
 		String avatarType = request.getParameter(I.AVATAR_TYPE);
+		String width = request.getParameter("width");
+		String height = request.getParameter("height");
 		// 2、交给业务层处理
-		biz.downAvatar(nameOrHxid,avatarType,response);
+		biz.downAvatar(nameOrHxid,avatarType,response,width,height);
 	}
 
 	private void updatePassword(HttpServletRequest request, HttpServletResponse response) {

@@ -188,6 +188,50 @@
                     }
                 ]
             }
+        },
+        "/updateAvatar":{
+            "post": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "更新用户头像",
+                "description": "客户端传入新图片，服务器接收新图片覆盖老图片同时将数据库更新",
+                "author": "cloudream 2016年7月5日17:50:46",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name_or_hxid",
+                        "in": "query",
+                        "description": "用户的账号或群组的环信id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "avatarType",
+                        "in": "query",
+                        "description": "头像类型",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "user_avatar",
+                                "group_icon"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "所要上传的头像用于更新头像",
+                        "required": false,
+                        "type": "file"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

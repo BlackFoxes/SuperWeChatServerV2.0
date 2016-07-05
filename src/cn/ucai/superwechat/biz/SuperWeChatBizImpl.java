@@ -99,7 +99,13 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 				FileItem fi = (FileItem) i.next();
 				fileName = fi.getName();
 				if (fileName != null) {
-					File savedFile = new File(path, name + fileName.substring(fileName.lastIndexOf(".")));
+					File savedFile = null;
+					if(name.indexOf(".")!=-1){// 更新头像操作
+						// 如果是更新图片，传过来的是shangpeng.jpg,，需要修改为shangpeng.png,上传则不必
+						savedFile = new File(path, name.substring(0,name.lastIndexOf(".")) + fileName.substring(fileName.lastIndexOf(".")));
+					}else{// 上传头像操作
+						savedFile = new File(path, name + fileName.substring(fileName.lastIndexOf(".")));
+					}
 					fi.write(savedFile);
 				}
 			}
@@ -204,7 +210,7 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 		// 先上传新图片覆盖旧图片
 		String suffix = uploadAvatar(nameOrHxid,avatarType,request);
 		if(suffix!=null){
-			if(dao.updateAvatar(nameOrHxid,avatarType)){// 更新头像表的最后更新时间
+			if(dao.updateAvatar(nameOrHxid,avatarType,suffix)){// 更新头像表的最后更新时间
 				result.setRetMsg(true);
 				result.setRetCode(I.MSG_SUCCESS);
 			}else{

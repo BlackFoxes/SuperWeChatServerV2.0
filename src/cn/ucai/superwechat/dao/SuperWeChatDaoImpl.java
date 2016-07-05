@@ -173,17 +173,19 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 	}
 
 	@Override
-	public boolean updateAvatar(String nameOrHxid, String avatarType) {
+	public boolean updateAvatar(String nameOrHxid, String avatarType,String suffix) {
 		Connection conn = DBUtils.getConnection();
 		PreparedStatement ps = null;
 		try {
 			String sql = "update "+ I.Avatar.TABLE_NAME 
-					+ " set "+I.Avatar.UPDATE_TIME +" = ? where "
+					+ " set "+I.Avatar.UPDATE_TIME +" = ?,"+I.Avatar.USER_NAME+" = ?"+" where "
 					+I.Avatar.USER_NAME +" = ? and "+I.Avatar.AVATAR_PATH + " = ? ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, System.currentTimeMillis()+"");
-			ps.setString(2, nameOrHxid);
-			ps.setString(3, avatarType);
+			// 除了更新时间外，用户名也更改，主要是图片后缀名可能更改了，如将shangpeng.png改为shangpeng.jpg
+			ps.setString(2, nameOrHxid.substring(0,nameOrHxid.lastIndexOf("."))+suffix);
+			ps.setString(3, nameOrHxid);
+			ps.setString(4, avatarType);
 			int count = ps.executeUpdate();
 			return count==1;
 		} catch (Exception e) {

@@ -53,7 +53,7 @@ public interface ISuperWeChatDao {
 	 * @param avatarType
 	 * @return
 	 */
-	boolean updateAvatar(String nameOrHxid, String avatarType);
+	boolean updateAvatar(String nameOrHxid, String avatarType,String suffix);
 	/**
 	 * 根据用户名删除用户
 	 * @param userName

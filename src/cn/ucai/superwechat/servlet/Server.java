@@ -36,13 +36,13 @@ public class Server extends HttpServlet {
 			getServerStatus(response);
 			break;*/
 		// 3、取消注册
-		case I.REQUEST_UNREGISTER:
+		/*case I.REQUEST_UNREGISTER:
 			unRegister(request,response);
-			break;
+			break;*/
 		// 4、用户登录
-		case I.REQUEST_LOGIN:
+		/*case I.REQUEST_LOGIN:
 			login(response, request);
-			break;
+			break;*/
 		// 5、下载用户或群组的头像
 		case I.REQUEST_DOWNLOAD_AVATAR:
 			downloadAvatar(request,response);

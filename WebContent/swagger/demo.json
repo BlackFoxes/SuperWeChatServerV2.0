@@ -38,7 +38,7 @@
                 ],
                 "summary": "获取服务端状态",
                 "description": "在首次连接服务端获取数据直接使用，用来检测客户端与服务端的连接状态。",
-				"author": "cloudream"
+				"author": "cloudream 2016年7月4日17:47:19"
             }
         },
         "/register": {
@@ -48,7 +48,7 @@
                 ],
                 "summary": "新用户注册",
                 "description": "将新用户信息及头像使用POST提交到服务器，完成新用户的注册。",
-                "author": "cloudream",
+                "author": "cloudream 2016年7月4日19:32:22",
                 "produces": [
                     "application/xml",
                     "application/json"
@@ -85,54 +85,106 @@
                 ]
             }
         },
-        "/Server": {
+        "/unregister":{
             "get": {
                 "tags": [
-                    "superwechat"
+                   "superwechat"  
                 ],
-                "summary": "根据状态查找宠物",
-                "description": "Multiple status values can be provided with comma seperated strings",
-				"author": "cloudream",
+                "summary": "取消注册",
+                "description": "在客户端注册新用户时候，环信服务器注册失败需要将远端提交注册的新用户数据及图片删除",
+                "author": "cloudream 2016年7月5日16:46:38",
                 "produces": [
                     "application/xml",
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "request",
+                        "name": "m_user_name",
                         "in": "query",
-                        "description": "Status values that need to be considered for filter",
+                        "description": "账号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/login":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "用户登录",
+                "description": "使用用户账号和密码登录服务端,服务器完成用户名和密码的校验逻辑",
+                "author": "cloudream 2016年7月5日16:36:11",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "账号",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "m_group_id",
+                        "name": "m_user_password",
                         "in": "query",
-                        "description": "必填",
+                        "description": "密码",
                         "required": true,
                         "type": "string"
                     }
+                ]
+            }
+        },
+        "/downloadAvatar":{
+            "get": {
+                "tags": [
+                   "superwechat"  
                 ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Pet"
-                            }
+                "summary": "下载头像",
+                "description": "提供头像数据，供客户端下载",
+                "author": "cloudream 2016年7月5日16:58:13",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name_or_hxid",
+                        "in": "query",
+                        "description": "用户的账号或群组的环信id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "avatarType",
+                        "in": "query",
+                        "description": "头像类型",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "user_avatar",
+                                "group_icon"
+                            ]
                         }
                     },
-                    "400": {
-                        "description": "Invalid status value"
-                    }
-                },
-                "security": [
                     {
-                        "petstore_auth": [
-                            "write:pets",
-                            "read:pets"
-                        ]
+                        "name": "width",
+                        "in": "query",
+                        "description": "头像宽度",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "height",
+                        "in": "query",
+                        "description": "头像高度",
+                        "required": true,
+                        "type": "integer"
                     }
                 ]
             }

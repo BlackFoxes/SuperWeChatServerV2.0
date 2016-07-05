@@ -43,13 +43,15 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 		// 查找数据库中有没有重名的用户
 		User u = dao.findUserByUsername(user.getMUserName());
 		if(u==null){// 没有
-			if(uploadAvatar(user.getMUserName(),I.AVATAR_TYPE_USER_PATH,request)){// 头像上传成功
-				if(dao.addUserAndAvatar(user)){// 注册成功
+			// 获得头像的后缀名
+			String suffix = uploadAvatar(user.getMUserName(),I.AVATAR_TYPE_USER_PATH,request);
+			if(suffix!=null){// 头像上传成功
+				if(dao.addUserAndAvatar(user,suffix)){// 注册成功
 					result.setRetMsg(true);
 					result.setRetCode(I.MSG_SUCCESS);
 				}else{
 					// 删除头像
-					deleteAvatar(PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_USER_PATH+"/",user.getMUserName());
+					deleteAvatar(PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_USER_PATH+"/",user.getMUserName()+suffix);
 					result.setRetMsg(false);
 					result.setRetCode(I.MSG_REGISTER_FAIL);
 				}
@@ -69,14 +71,14 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 	 * @param path
 	 * @param name
 	 */
-	private void deleteAvatar(String path,String name) {
-		File file = new File(path,name+I.AVATAR_SUFFIX_JPG);
+	private void deleteAvatar(String path,String imageName) {
+		File file = new File(path,imageName);
 		if(file.exists()){
 			file.delete();
 		}
 	}
 	
-	private boolean uploadAvatar(String name,String avatarType,HttpServletRequest request){
+	private String uploadAvatar(String name,String avatarType,HttpServletRequest request){
 		String path = null;
 		if (avatarType.equals(I.AVATAR_TYPE_USER_PATH)) {// 用户上传头像
 			path = PropertiesUtils.getValue("avatar_path", "path.properties") + I.AVATAR_TYPE_USER_PATH + "/";
@@ -92,18 +94,19 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 			upload.setSizeMax(4194304); // 设置最大文件尺寸，这里是4MB
 			List<FileItem> items = upload.parseRequest(request);// 得到所有的文件
 			Iterator<FileItem> i = items.iterator();
+			String fileName = null;
 			while (i.hasNext()) {
 				FileItem fi = (FileItem) i.next();
-				String fileName = fi.getName();
+				fileName = fi.getName();
 				if (fileName != null) {
 					File savedFile = new File(path, name + fileName.substring(fileName.lastIndexOf(".")));
 					fi.write(savedFile);
 				}
 			}
-			return true;
+			return fileName.substring(fileName.lastIndexOf("."));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 	
@@ -198,7 +201,9 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 	@Override
 	public Result updateAvatar(String nameOrHxid, String avatarType, HttpServletRequest request) {
 		Result result = new Result();
-		if(uploadAvatar(nameOrHxid,avatarType,request)){// 先上传新图片覆盖旧图片
+		// 先上传新图片覆盖旧图片
+		String suffix = uploadAvatar(nameOrHxid,avatarType,request);
+		if(suffix!=null){
 			if(dao.updateAvatar(nameOrHxid,avatarType)){// 更新头像表的最后更新时间
 				result.setRetMsg(true);
 				result.setRetCode(I.MSG_SUCCESS);
@@ -367,8 +372,9 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 		Result result = null;
 		Group groupFind = dao.findGroupByHxid(group.getMGroupHxid());
 		if(groupFind==null){
-			if(uploadAvatar(group.getMGroupHxid(),I.AVATAR_TYPE_GROUP_PATH,request)){// 头像上传成功
-				if(dao.addGroupAndGroupOwnerMember(group)){// 添加群组成功
+			String suffix = uploadAvatar(group.getMGroupHxid(),I.AVATAR_TYPE_GROUP_PATH,request);
+			if(suffix!=null){// 头像上传成功
+				if(dao.addGroupAndGroupOwnerMember(group,suffix)){// 添加群组成功
 					result = new Result(true,I.MSG_SUCCESS);
 					GroupAvatar gAvatar = dao.findGroupAvatarByHxId(group.getMGroupHxid());
 					try {
@@ -381,7 +387,7 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 				}else{// 添加群组失败
 					result = new Result(false,I.MSG_GROUP_CREATE_FAIL);
 					// 删除本地图片
-					deleteAvatar(PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_GROUP_PATH,group.getMGroupHxid());
+					deleteAvatar(PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_GROUP_PATH,group.getMGroupHxid()+suffix);
 				}
 			}else{
 				result = new Result(false,I.MSG_UPLOAD_AVATAR_FAIL);

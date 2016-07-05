@@ -22,7 +22,7 @@ public interface ISuperWeChatDao {
 	 * @param user
 	 * @return
 	 */
-	boolean addUserAndAvatar(User user);
+	boolean addUserAndAvatar(User user,String suffix);
 
 	/**
 	 * 根据用户名更新昵称
@@ -131,7 +131,7 @@ public interface ISuperWeChatDao {
 	 * @param group
 	 * @return
 	 */
-	boolean addGroupAndGroupOwnerMember(Group group);
+	boolean addGroupAndGroupOwnerMember(Group group,String suffix);
 	/**
 	 * 根据环信id查找群组和头像信息
 	 * @param mGroupHxid

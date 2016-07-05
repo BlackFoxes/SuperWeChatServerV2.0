@@ -57,7 +57,7 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 	 * 事务操作!
 	 */
 	@Override
-	public boolean addUserAndAvatar(User user) {
+	public boolean addUserAndAvatar(User user,String suffix) {
 		Connection conn = DBUtils.getConnection();
 		PreparedStatement ps = null;
 		try {
@@ -75,7 +75,7 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 					+I.Avatar.AVATAR_TYPE+","+I.Avatar.UPDATE_TIME+")"
 					+ "values (?,?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getMUserName());
+			ps.setString(1, user.getMUserName()+suffix);
 			ps.setString(2, I.AVATAR_TYPE_USER_PATH);
 			ps.setInt(3, I.AVATAR_TYPE_USER);
 			ps.setString(4,System.currentTimeMillis()+"");
@@ -545,7 +545,7 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 	}
 
 	@Override
-	public boolean addGroupAndGroupOwnerMember(Group group) {
+	public boolean addGroupAndGroupOwnerMember(Group group,String suffix) {
 		Connection conn = DBUtils.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -584,7 +584,7 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 			sql = "insert into " + I.Avatar.TABLE_NAME + "(" + I.Avatar.USER_NAME + "," + I.Avatar.AVATAR_PATH + ","
 					+ I.Avatar.AVATAR_TYPE + ","+I.Avatar.UPDATE_TIME+")values(?,?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, group.getMGroupHxid());
+			ps.setString(1, group.getMGroupHxid()+suffix);
 			ps.setString(2, I.AVATAR_TYPE_GROUP_PATH);
 			ps.setInt(3, I.AVATAR_TYPE_GROUP);
 			ps.setString(4,System.currentTimeMillis()+"");

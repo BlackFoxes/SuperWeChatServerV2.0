@@ -44,9 +44,9 @@ public class Server extends HttpServlet {
 			login(response, request);
 			break;*/
 		// 5、下载用户或群组的头像
-		case I.REQUEST_DOWNLOAD_AVATAR:
+		/*case I.REQUEST_DOWNLOAD_AVATAR:
 			downloadAvatar(request,response);
-			break;
+			break;*/
 		// 7、更新用户昵称
 		case I.REQUEST_UPDATE_USER_NICK:
 			updateNick(request,response);
@@ -482,14 +482,14 @@ public class Server extends HttpServlet {
 		// 接收请求的参数
 		String strReq = request.getParameter("request");
 		switch (strReq) {
-		// 1、注册请求
+		/*// 1、注册请求
 		case I.REQUEST_REGISTER:
 			register(request,response);
 			break;
 		// 6、更新用户或群组头像
 		case I.REQUEST_UPLOAD_AVATAR:
 			updateAvatar(request,response);
-			break;
+			break;*/
 		// 15、创建群组
 		case I.REQUEST_CREATE_GROUP:
 			createGroup(request,response);

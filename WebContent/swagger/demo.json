@@ -232,6 +232,36 @@
                     }
                 ]
             }
+        },
+         "/updateNick":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "更新用户昵称",
+                "description": "客户端传来用户名和新昵称，服务端根据用户名更新昵称为新昵称的值",
+                "author": "cloudream 2016年7月5日18:14:03",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_user_nick",
+                        "in": "query",
+                        "description": "用户新昵称",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

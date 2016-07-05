@@ -1,17 +1,20 @@
 package cn.ucai.superwechat.biz;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import cn.ucai.superwechat.bean.GroupAvatar;
 import cn.ucai.superwechat.bean.LocationUserAvatar;
@@ -73,46 +76,35 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 		}
 	}
 	
-	private boolean uploadAvatar(String name,String avatarType,HttpServletRequest request) {
+	private boolean uploadAvatar(String name,String avatarType,HttpServletRequest request){
 		String path = null;
-		if(avatarType.equals(I.AVATAR_TYPE_USER_PATH)){// 用户上传头像
-			path = PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_USER_PATH+"/";
-		}else if(avatarType.equals(I.AVATAR_TYPE_GROUP_PATH)){// 群组上传
-			path = PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_GROUP_PATH+"/";
+		if (avatarType.equals(I.AVATAR_TYPE_USER_PATH)) {// 用户上传头像
+			path = PropertiesUtils.getValue("avatar_path", "path.properties") + I.AVATAR_TYPE_USER_PATH + "/";
+		} else if (avatarType.equals(I.AVATAR_TYPE_GROUP_PATH)) {// 群组上传
+			path = PropertiesUtils.getValue("avatar_path", "path.properties") + I.AVATAR_TYPE_GROUP_PATH + "/";
 		}
-		// 文件的拷贝（上传）  
-		// File file = new File("E:/test/user_avatar/shangpeng.jgp");
-		File file = new File(path+name+I.AVATAR_SUFFIX_JPG);
-		InputStream is = null;
-		FileOutputStream fos = null;
 		try {
-			is = request.getInputStream();
-			byte[] byArr = new byte[1024*4];
-			fos = new FileOutputStream(file);
-			int b = 0;
-			while((b=is.read(byArr))!=-1){
-				fos.write(byArr, 0, b);
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			factory.setSizeThreshold(4096); // 设置缓冲区大小，这里是4kb
+			// 设置临时文件目录
+			factory.setRepository(new File(PropertiesUtils.getValue("temp_path", "path.properties")));// 设置缓冲区目录
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			upload.setSizeMax(4194304); // 设置最大文件尺寸，这里是4MB
+			List<FileItem> items = upload.parseRequest(request);// 得到所有的文件
+			Iterator<FileItem> i = items.iterator();
+			while (i.hasNext()) {
+				FileItem fi = (FileItem) i.next();
+				String fileName = fi.getName();
+				if (fileName != null) {
+					File savedFile = new File(path, name + fileName.substring(fileName.lastIndexOf(".")));
+					fi.write(savedFile);
+				}
 			}
 			return true;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			if(is!=null){
-				try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if(fos!=null){
-				try {
-					fos.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			return false;
 		}
-		return false;
 	}
 	
 	@Override

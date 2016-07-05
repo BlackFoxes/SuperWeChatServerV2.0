@@ -32,9 +32,9 @@ public class Server extends HttpServlet {
 		System.out.println("strReq:"+strReq);
 		switch (strReq) {
 		// 1、获取服务端状态
-		case I.REQUEST_SERVERSTATUS:
+		/*case I.REQUEST_SERVERSTATUS:
 			getServerStatus(response);
-			break;
+			break;*/
 		// 3、取消注册
 		case I.REQUEST_UNREGISTER:
 			unRegister(request,response);

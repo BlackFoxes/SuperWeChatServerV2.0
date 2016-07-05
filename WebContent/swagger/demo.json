@@ -4,9 +4,10 @@
         "description": "大家可以在此页面做服务端接口的测试啦",
         "title": "项目测试页"
     },
+    "host": "localhost:8080/SuperWeChatServerV2.0",
     "tags": [
         {
-            "name": "超级微信",
+            "name": "superwechat",
             "description": "所有接口",
             "externalDocs": {
                 "description": "Find out more",
@@ -30,58 +31,68 @@
         "http"
     ],
     "paths": {
-        "/pet": {
+        "/getServerStatus": {
+            "get": {
+                "tags": [
+                    "superwechat"
+                ],
+                "summary": "获取服务端状态",
+                "description": "在首次连接服务端获取数据直接使用，用来检测客户端与服务端的连接状态。",
+				"author": "cloudream"
+            }
+        },
+        "/register": {
             "post": {
                 "tags": [
-                    "pet"
+                   "superwechat"  
                 ],
-                "summary": "添加一个新宠物到商店！",
-                "description": "",
-				"author": "cloudream",
-                "operationId": "addPet",
-                "consumes": [
-                    "application/json",
-                    "application/xml"
-                ],
+                "summary": "新用户注册",
+                "description": "将新用户信息及头像使用POST提交到服务器，完成新用户的注册。",
+                "author": "cloudream",
                 "produces": [
                     "application/xml",
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Pet object that needs to be added to the store",
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "账号",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Pet"
-                        }
-                    }
-                ],
-                "responses": {
-                    "405": {
-                        "description": "Invalid input"
-                    }
-                },
-                "security": [
+                        "type": "string"
+                    },
                     {
-                        "petstore_auth": [
-                            "write:pets",
-                            "read:pets"
-                        ]
+                        "name": "m_user_nick",
+                        "in": "query",
+                        "description": "昵称",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_user_password",
+                        "in": "query",
+                        "description": "密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "所要上传的头像",
+                        "required": false,
+                        "type": "file"
                     }
                 ]
             }
         },
-        "/SuperWeChatServerV2.0/Server": {
+        "/Server": {
             "get": {
                 "tags": [
-                    "pet"
+                    "superwechat"
                 ],
                 "summary": "根据状态查找宠物",
                 "description": "Multiple status values can be provided with comma seperated strings",
 				"author": "cloudream",
-                "operationId": "findPetsByStatus",
                 "produces": [
                     "application/xml",
                     "application/json"

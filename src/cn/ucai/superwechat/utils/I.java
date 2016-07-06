@@ -43,6 +43,7 @@ public interface I {
 		String TABLE_NAME 							= 		"t_superwechat_avatar";
 		String AVATAR_ID 							= 		"m_avatar_id";					//主键
 		String USER_NAME 							= 		"m_avatar_user_name";			//用户账号或者群组账号
+		String AVATAR_SUFFIX                        =       "m_avatar_suffix";              // 头像后缀名
 		String AVATAR_PATH 							= 		"m_avatar_path";				//保存路径
 		String AVATAR_TYPE 							= 		"m_avatar_type";				//头像类型：\n0:用户头像\n1:群组头像
 		String UPDATE_TIME 							= 		"m_avatar_last_update_time";	//最后更新时间

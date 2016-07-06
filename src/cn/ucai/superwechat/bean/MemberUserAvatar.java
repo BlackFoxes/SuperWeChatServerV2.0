@@ -2,7 +2,6 @@ package cn.ucai.superwechat.bean;
 
 public class MemberUserAvatar extends UserAvatar {
 	private Integer mmemberId;
-//	private String mmemberUserName;
 	private Integer mmemberGroupId;
 	private String mmemberGroupHxid;
 	private Integer mmemberPermission;
@@ -10,10 +9,10 @@ public class MemberUserAvatar extends UserAvatar {
 		super();
 	}
 
-	public MemberUserAvatar(String muserName, String muserNick, Integer mavatarId, String mavatarPath,
+	public MemberUserAvatar(String muserName, String muserNick, Integer mavatarId, String mavatarPath,String mavatarSuffix,
 			Integer mavatarType, String mavatarLastUpdateTime,Integer mmemberId, Integer mmemberGroupId, String mmemberGroupHxid,
 			Integer mmemberPermission) {
-		super(muserName, muserNick, mavatarId, mavatarPath, mavatarType, mavatarLastUpdateTime);
+		super(muserName, muserNick, mavatarId, mavatarPath,mavatarSuffix, mavatarType, mavatarLastUpdateTime);
 		this.mmemberId = mmemberId;
 		this.mmemberGroupId = mmemberGroupId;
 		this.mmemberGroupHxid = mmemberGroupHxid;
@@ -26,12 +25,6 @@ public class MemberUserAvatar extends UserAvatar {
 	public void setMMemberId(Integer mmemberId) {
 		this.mmemberId = mmemberId;
 	}
-/*	public String getMMemberUserName() {
-		return mmemberUserName;
-	}
-	public void setMMemberUserName(String mmemberUserName) {
-		this.mmemberUserName = mmemberUserName;
-	}*/
 	public Integer getMMemberGroupId() {
 		return mmemberGroupId;
 	}

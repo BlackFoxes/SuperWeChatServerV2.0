@@ -2,12 +2,10 @@ package cn.ucai.superwechat.bean;
 
 public class UserAvatar {
 	private String muserName;
-//	private String muserPassword;
 	private String muserNick;
-//	private Integer muserUnreadMsgCount;
 	private Integer mavatarId;
-//	private String mavatarUserName;
 	private String mavatarPath;
+	private String mavatarSuffix;
 	private Integer mavatarType;
 	private String mavatarLastUpdateTime;
 	
@@ -15,17 +13,15 @@ public class UserAvatar {
 		super();
 	}
 
-	public UserAvatar(String muserName/*, String muserPassword*/, String muserNick/*, Integer muserUnreadMsgCount*/,
-			Integer mavatarId/*, String mavatarUserName*/, String mavatarPath, Integer mavatarType,
+	public UserAvatar(String muserName, String muserNick,
+			Integer mavatarId, String mavatarPath, String mavatarSuffix, Integer mavatarType,
 			String mavatarLastUpdateTime) {
 		super();
 		this.muserName = muserName;
-//		this.muserPassword = muserPassword;
 		this.muserNick = muserNick;
-//		this.muserUnreadMsgCount = muserUnreadMsgCount;
 		this.mavatarId = mavatarId;
-//		this.mavatarUserName = mavatarUserName;
 		this.mavatarPath = mavatarPath;
+		this.mavatarSuffix = mavatarSuffix;
 		this.mavatarType = mavatarType;
 		this.mavatarLastUpdateTime = mavatarLastUpdateTime;
 	}
@@ -37,15 +33,7 @@ public class UserAvatar {
 	public void setMUserName(String muserName) {
 		this.muserName = muserName;
 	}
-/*
-	public String getMUserPassword() {
-		return muserPassword;
-	}
 
-	public void setMUserPassword(String muserPassword) {
-		this.muserPassword = muserPassword;
-	}
-*/
 	public String getMUserNick() {
 		return muserNick;
 	}
@@ -53,15 +41,7 @@ public class UserAvatar {
 	public void setMUserNick(String muserNick) {
 		this.muserNick = muserNick;
 	}
-/*
-	public Integer getMUserUnreadMsgCount() {
-		return muserUnreadMsgCount;
-	}
-
-	public void setMUserUnreadMsgCount(Integer muserUnreadMsgCount) {
-		this.muserUnreadMsgCount = muserUnreadMsgCount;
-	}
-*/
+	
 	public Integer getMAvatarId() {
 		return mavatarId;
 	}
@@ -69,15 +49,6 @@ public class UserAvatar {
 	public void setMAvatarId(Integer mavatarId) {
 		this.mavatarId = mavatarId;
 	}
-/*
-	public String getMAvatarUserName() {
-		return mavatarUserName;
-	}
-
-	public void setMAvatarUserName(String mavatarUserName) {
-		this.mavatarUserName = mavatarUserName;
-	}
-*/
 	public String getMAvatarPath() {
 		return mavatarPath;
 	}
@@ -101,11 +72,19 @@ public class UserAvatar {
 	public void setMAvatarLastUpdateTime(String mavatarLastUpdateTime) {
 		this.mavatarLastUpdateTime = mavatarLastUpdateTime;
 	}
+	
+	public void setMAvatarSuffix(String mavatarSuffix) {
+		this.mavatarSuffix = mavatarSuffix;
+	}
 
+	public String getMAvatarSuffix() {
+		return mavatarSuffix;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserAvatar [muserName=" + muserName + ", muserNick=" + muserNick + ", mavatarId=" + mavatarId
-				+ ", mavatarPath=" + mavatarPath + ", mavatarType=" + mavatarType + ", mavatarLastUpdateTime="
-				+ mavatarLastUpdateTime + "]";
+				+ ", mavatarPath=" + mavatarPath + ", mavatarSuffix=" + mavatarSuffix + ", mavatarType=" + mavatarType
+				+ ", mavatarLastUpdateTime=" + mavatarLastUpdateTime + "]";
 	}
 }

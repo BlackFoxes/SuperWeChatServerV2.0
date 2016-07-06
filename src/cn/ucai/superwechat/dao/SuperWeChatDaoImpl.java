@@ -71,14 +71,15 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 			ps.close();
 			// insert into avatar(username,path,type,time) values
 			sql = "insert into "+I.Avatar.TABLE_NAME+"("
-					+I.Avatar.USER_NAME+","+I.Avatar.AVATAR_PATH+","
+					+I.Avatar.USER_NAME+","+I.Avatar.AVATAR_PATH+","+I.Avatar.AVATAR_SUFFIX+","
 					+I.Avatar.AVATAR_TYPE+","+I.Avatar.UPDATE_TIME+")"
-					+ "values (?,?,?,?)";
+					+ "values (?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getMUserName()+suffix);
+			ps.setString(1, user.getMUserName());
 			ps.setString(2, I.AVATAR_TYPE_USER_PATH);
-			ps.setInt(3, I.AVATAR_TYPE_USER);
-			ps.setString(4,System.currentTimeMillis()+"");
+			ps.setString(3, suffix);
+			ps.setInt(4, I.AVATAR_TYPE_USER);
+			ps.setString(5,System.currentTimeMillis()+"");
 			ps.executeUpdate();
 			ps.close();
 			conn.commit();
@@ -123,7 +124,6 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			// select * from user,avatar where username = 'shangpeng' and 
 			String sql = "select * from "+I.User.TABLE_NAME+","+I.Avatar.TABLE_NAME
 					+ " where "+I.User.USER_NAME +" = ?"
 					+ " and " + I.User.USER_NAME +"="+I.Avatar.USER_NAME
@@ -134,12 +134,6 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 			rs = ps.executeQuery();
 			if(rs.next()){
 				UserAvatar ua = new UserAvatar();
-				/*ua.setMUserName(rs.getString(I.User.USER_NAME));
-				ua.setMUserNick(rs.getString(I.User.NICK));
-				ua.setMAvatarId(rs.getInt(I.Avatar.AVATAR_ID));
-				ua.setMAvatarType(rs.getInt(I.Avatar.AVATAR_TYPE));
-				ua.setMAvatarPath(rs.getString(I.Avatar.AVATAR_PATH));
-				ua.setMAvatarLastUpdateTime(rs.getString(I.Avatar.UPDATE_TIME));*/
 				initUserAvatar(rs, ua);
 				return ua;
 			}
@@ -178,12 +172,12 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 		PreparedStatement ps = null;
 		try {
 			String sql = "update "+ I.Avatar.TABLE_NAME 
-					+ " set "+I.Avatar.UPDATE_TIME +" = ?,"+I.Avatar.USER_NAME+" = ?"+" where "
+					+ " set "+I.Avatar.UPDATE_TIME +" = ?,"+I.Avatar.AVATAR_SUFFIX+" = ?"+" where "
 					+I.Avatar.USER_NAME +" = ? and "+I.Avatar.AVATAR_PATH + " = ? ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, System.currentTimeMillis()+"");
-			// 除了更新时间外，用户名也更改，主要是图片后缀名可能更改了，如将shangpeng.png改为shangpeng.jpg
-			ps.setString(2, nameOrHxid.substring(0,nameOrHxid.lastIndexOf("."))+suffix);
+			// 除了更新时间外，图片后缀名也需要更改，如将.png改为.jpg
+			ps.setString(2, suffix);
 			ps.setString(3, nameOrHxid);
 			ps.setString(4, avatarType);
 			int count = ps.executeUpdate();
@@ -326,6 +320,7 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 		userAvatar.setMUserNick(rs.getString(I.User.NICK));
 		userAvatar.setMAvatarId(rs.getInt(I.Avatar.AVATAR_ID));
 		userAvatar.setMAvatarPath(rs.getString(I.Avatar.AVATAR_PATH));
+		userAvatar.setMAvatarSuffix(rs.getString(I.Avatar.AVATAR_SUFFIX));
 		userAvatar.setMAvatarType(rs.getInt(I.Avatar.AVATAR_TYPE));
 		userAvatar.setMAvatarLastUpdateTime(rs.getString(I.Avatar.UPDATE_TIME));
 	}
@@ -584,12 +579,13 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 			ps.close();
 			
 			sql = "insert into " + I.Avatar.TABLE_NAME + "(" + I.Avatar.USER_NAME + "," + I.Avatar.AVATAR_PATH + ","
-					+ I.Avatar.AVATAR_TYPE + ","+I.Avatar.UPDATE_TIME+")values(?,?,?,?)";
+					+I.Avatar.AVATAR_SUFFIX+","+ I.Avatar.AVATAR_TYPE + ","+I.Avatar.UPDATE_TIME+")values(?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, group.getMGroupHxid()+suffix);
+			ps.setString(1, group.getMGroupHxid());
 			ps.setString(2, I.AVATAR_TYPE_GROUP_PATH);
-			ps.setInt(3, I.AVATAR_TYPE_GROUP);
-			ps.setString(4,System.currentTimeMillis()+"");
+			ps.setString(3, suffix);
+			ps.setInt(4, I.AVATAR_TYPE_GROUP);
+			ps.setString(5,System.currentTimeMillis()+"");
 			ps.executeUpdate();
 			ps.close();
 			
@@ -660,6 +656,7 @@ public class SuperWeChatDaoImpl implements ISuperWeChatDao {
 		groupAvatar.setMAvatarId(rs.getInt(I.Avatar.AVATAR_ID));
 		groupAvatar.setMAvatarUserName(rs.getString(I.Avatar.USER_NAME));
 		groupAvatar.setMAvatarPath(rs.getString(I.Avatar.AVATAR_PATH));
+		groupAvatar.setMAvatarSuffix(rs.getString(I.Avatar.AVATAR_SUFFIX));
 		groupAvatar.setMAvatarType(rs.getInt(I.Avatar.AVATAR_TYPE));
 		groupAvatar.setMAvatarLastUpdateTime(rs.getString(I.Avatar.UPDATE_TIME));
 	}

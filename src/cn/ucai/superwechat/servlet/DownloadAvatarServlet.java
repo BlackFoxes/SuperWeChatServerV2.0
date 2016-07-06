@@ -18,12 +18,11 @@ public class DownloadAvatarServlet extends HttpServlet{
 	private ISuperWeChatBiz  biz = new SuperWeChatBizImpl();
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1、接收参数
 		String nameOrHxid = request.getParameter(I.NAME_OR_HXID);
+		String avatarSuffix = request.getParameter(I.Avatar.AVATAR_SUFFIX);
 		String avatarType = request.getParameter(I.AVATAR_TYPE);
 		String width = request.getParameter("width");
 		String height = request.getParameter("height");
-		// 2、交给业务层处理
-		biz.downAvatar(nameOrHxid,avatarType,response,width,height);
+		biz.downAvatar(nameOrHxid,avatarSuffix,avatarType,response,width,height);
 	}
 }

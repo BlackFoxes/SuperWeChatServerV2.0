@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class LocationUserAvatar extends UserAvatar implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer mlocationId;
-//	private String mlocationUserName;
 	private Double mlocationLatitude;
 	private Double mlocationLongitude;
 	private Boolean mlocationIsSearched;
@@ -15,10 +14,10 @@ public class LocationUserAvatar extends UserAvatar implements Serializable{
 		super();
 	}
 
-	public LocationUserAvatar(String muserName, String muserNick, Integer mavatarId, String mavatarPath,
+	public LocationUserAvatar(String muserName, String muserNick, Integer mavatarId, String mavatarPath,String mavatarSuffix,
 			Integer mavatarType, String mavatarLastUpdateTime,Integer mlocationId, Double mlocationLatitude, Double mlocationLongitude,
 			Boolean mlocationIsSearched, String mlocationLastUpdateTime, Double distance) {
-		super(muserName, muserNick, mavatarId, mavatarPath, mavatarType, mavatarLastUpdateTime);
+		super(muserName, muserNick, mavatarId, mavatarPath,mavatarSuffix, mavatarType, mavatarLastUpdateTime);
 		this.mlocationId = mlocationId;
 		this.mlocationLatitude = mlocationLatitude;
 		this.mlocationLongitude = mlocationLongitude;
@@ -33,12 +32,6 @@ public class LocationUserAvatar extends UserAvatar implements Serializable{
 	public void setMLocationId(Integer mlocationId) {
 		this.mlocationId = mlocationId;
 	}
-/*	public String getMLocationUserName() {
-		return mlocationUserName;
-	}
-	public void setMLocationUserName(String mlocationUserName) {
-		this.mlocationUserName = mlocationUserName;
-	}*/
 	public Double getMLocationLatitude() {
 		return mlocationLatitude;
 	}
@@ -69,4 +62,12 @@ public class LocationUserAvatar extends UserAvatar implements Serializable{
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+
+	@Override
+	public String toString() {
+		return "LocationUserAvatar [mlocationId=" + mlocationId + ", mlocationLatitude=" + mlocationLatitude
+				+ ", mlocationLongitude=" + mlocationLongitude + ", mlocationIsSearched=" + mlocationIsSearched
+				+ ", mlocationLastUpdateTime=" + mlocationLastUpdateTime + ", distance=" + distance + "]";
+	}
+	
 }

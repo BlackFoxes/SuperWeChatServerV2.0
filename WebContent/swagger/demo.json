@@ -173,6 +173,20 @@
                         }
                     },
                     {
+                        "name": "m_avatar_suffix",
+                        "in": "query",
+                        "description": "头像后缀名",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                ".jpg",
+                                ".png"
+                            ]
+                        }
+                    },
+                    {
                         "name": "width",
                         "in": "query",
                         "description": "头像宽度",

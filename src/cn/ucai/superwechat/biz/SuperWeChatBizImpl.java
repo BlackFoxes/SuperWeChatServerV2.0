@@ -190,11 +190,11 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 		return result;
 	}
 	@Override
-	public void downAvatar(String nameOrHxid, String avatarType, HttpServletResponse response,String width,String height) {
+	public void downAvatar(String nameOrHxid,String avatarSuffix ,String avatarType, HttpServletResponse response,String width,String height) {
 		// 1、从文件中读
 		// 2、将读到的内容写入到客户端
 		response.setContentType("image/jpeg"); // MIME
-		File file = new File(PropertiesUtils.getValue("avatar_path","path.properties")+avatarType+"/",nameOrHxid+I.AVATAR_SUFFIX_JPG);
+		File file = new File(PropertiesUtils.getValue("avatar_path","path.properties")+avatarType+"/",nameOrHxid+avatarSuffix);
 		try {
 			ImageUtil.zoom(file.getPath(), response.getOutputStream(), Integer.parseInt(width), Integer.parseInt(height));
 		} catch (IOException e) {

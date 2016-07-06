@@ -7,6 +7,7 @@ public class GroupAvatar implements Serializable{
 	private Integer mavatarId;
 	private String mavatarUserName;
 	private String mavatarPath;
+	private String mavatarSuffix;
 	private Integer mavatarType;
 	private String mavatarLastUpdateTime;
 	private Integer mgroupId;
@@ -22,7 +23,7 @@ public class GroupAvatar implements Serializable{
 	public GroupAvatar() {
 		super();
 	}
-	public GroupAvatar(Integer mavatarId, String mavatarUserName, String mavatarPath, Integer mavatarType,
+	public GroupAvatar(Integer mavatarId, String mavatarUserName, String mavatarPath, String mavatarSuffix, Integer mavatarType,
 			String mavatarLastUpdateTime, Integer mgroupId, String mgroupHxid, String mgroupName,
 			String mgroupDescription, String mgroupOwner, String mgroupLastModifiedTime, Integer mgroupMaxUsers,
 			Integer mgroupAffiliationsCount, Boolean mgroupIsPublic, Boolean mgroupAllowInvites) {
@@ -30,6 +31,7 @@ public class GroupAvatar implements Serializable{
 		this.mavatarId = mavatarId;
 		this.mavatarUserName = mavatarUserName;
 		this.mavatarPath = mavatarPath;
+		this.mavatarSuffix = mavatarSuffix;
 		this.mavatarType = mavatarType;
 		this.mavatarLastUpdateTime = mavatarLastUpdateTime;
 		this.mgroupId = mgroupId;
@@ -133,15 +135,23 @@ public class GroupAvatar implements Serializable{
 	public void setMGroupAllowInvites(Boolean mgroupAllowInvites) {
 		this.mgroupAllowInvites = mgroupAllowInvites;
 	}
+	
+	public String getMAvatarSuffix() {
+		return mavatarSuffix;
+	}
+	public void setMAvatarSuffix(String mavatarSuffix) {
+		this.mavatarSuffix = mavatarSuffix;
+	}
+	
 	@Override
 	public String toString() {
 		return "GroupAvatar [mavatarId=" + mavatarId + ", mavatarUserName=" + mavatarUserName + ", mavatarPath="
-				+ mavatarPath + ", mavatarType=" + mavatarType + ", mavatarLastUpdateTime=" + mavatarLastUpdateTime
-				+ ", mgroupId=" + mgroupId + ", mgroupHxid=" + mgroupHxid + ", mgroupName=" + mgroupName
-				+ ", mgroupDescription=" + mgroupDescription + ", mgroupOwner=" + mgroupOwner
-				+ ", mgroupLastModifiedTime=" + mgroupLastModifiedTime + ", mgroupMaxUsers=" + mgroupMaxUsers
-				+ ", mgroupAffiliationsCount=" + mgroupAffiliationsCount + ", mgroupIsPublic=" + mgroupIsPublic
-				+ ", mgroupAllowInvites=" + mgroupAllowInvites + "]";
+				+ mavatarPath + ", mavatarSuffix=" + mavatarSuffix + ", mavatarType=" + mavatarType
+				+ ", mavatarLastUpdateTime=" + mavatarLastUpdateTime + ", mgroupId=" + mgroupId + ", mgroupHxid="
+				+ mgroupHxid + ", mgroupName=" + mgroupName + ", mgroupDescription=" + mgroupDescription
+				+ ", mgroupOwner=" + mgroupOwner + ", mgroupLastModifiedTime=" + mgroupLastModifiedTime
+				+ ", mgroupMaxUsers=" + mgroupMaxUsers + ", mgroupAffiliationsCount=" + mgroupAffiliationsCount
+				+ ", mgroupIsPublic=" + mgroupIsPublic + ", mgroupAllowInvites=" + mgroupAllowInvites + "]";
 	}
 	
 }

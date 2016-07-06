@@ -73,9 +73,9 @@ public class Server extends HttpServlet {
 			deleteContact(request, response);
 			break;*/
 		// 13、根据用户名查找用户
-		case I.REQUEST_FIND_USER:
+		/*case I.REQUEST_FIND_USER:
 			findUserByUserName(request, response);
-			break;
+			break;*/
 		// 14、根据用户名或昵称，模糊分页查询用户列表
 		case I.REQUEST_FIND_USERS_FOR_SEARCH:
 			findUsersForSearch(request, response);
@@ -259,29 +259,6 @@ public class Server extends HttpServlet {
 	}
 	
 	/**
-	 * 删除好友关系
-	 * @param request
-	 * @param response
-	 */
-	private void deleteContact(HttpServletRequest request, HttpServletResponse response) {
-		String name = request.getParameter(I.Contact.USER_NAME);
-		String cname = request.getParameter(I.Contact.CU_NAME);
-		Result result = biz.delContact(name,cname);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	/**
-	 * 添加好友关系
-	 */
-	private void addContact(HttpServletRequest request, HttpServletResponse response) {
-		String name = request.getParameter(I.Contact.USER_NAME);
-		String cname = request.getParameter(I.Contact.CU_NAME);
-		Result result = biz.addContact(name,cname);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	
-	/**
 	 * 添加多成员信息
 	 * @param request
 	 * @param response
@@ -325,34 +302,6 @@ public class Server extends HttpServlet {
 		JsonUtil.writeJsonToClient(result, response);
 	}
 
-	
-	/**
-	 * 登录
-	 * @param response
-	 * @param request
-	 */
-	private void login(HttpServletResponse response, HttpServletRequest request) {
-		String userName = request.getParameter(I.User.USER_NAME);
-		String password = request.getParameter(I.User.PASSWORD);
-		User user = new User();
-		user.setMUserName(userName);
-		user.setMUserPassword(password);
-		Result result = biz.login(user);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	/**
-	 * 解除注册
-	 * @param request
-	 * @param response
-	 */
-	private void unRegister(HttpServletRequest request, HttpServletResponse response) {
-		// 接收用户参数
-		String userName = request.getParameter(I.User.USER_NAME);
-		Result result = biz.unRegister(userName);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-	
 	/**
 	 * 根据环信id，下载全部群组成员
 	 * @param request
@@ -408,89 +357,10 @@ public class Server extends HttpServlet {
 		JsonUtil.writeJsonToClient(result, response);
 	}
 
-	/**
-	 * 根据用户名精确查找用户信息
-	 * @param request
-	 * @param response
-	 */
-	private void findUserByUserName(HttpServletRequest request, HttpServletResponse response) {
-		String userName = request.getParameter(I.User.USER_NAME);
-		Result result = biz.findUserByUserName(userName);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	/**
-	 * 分页下载好友列表
-	 * @param request
-	 * @param response
-	 */
-	private void downloadContactPageList(HttpServletRequest request, HttpServletResponse response) {
-		String userName = request.getParameter(I.Contact.USER_NAME);
-		String pageId = request.getParameter(I.PAGE_ID);
-		String pageSize = request.getParameter(I.PAGE_SIZE);
-		Result result = biz.findContactPagesByUserName(userName, pageId, pageSize);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-	
-	/**
-	 * 下载所有好友列表
-	 * @param request
-	 * @param response
-	 */
-	private void downloadContactAllList(HttpServletRequest request, HttpServletResponse response) {
-		String userName = request.getParameter(I.Contact.USER_NAME);
-		Result result = biz.findContactAllByUserName(userName);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	private void downloadAvatar(HttpServletRequest request, HttpServletResponse response) {
-		// 1、接收参数
-		String nameOrHxid = request.getParameter(I.NAME_OR_HXID);
-		String avatarType = request.getParameter(I.AVATAR_TYPE);
-		String width = request.getParameter("width");
-		String height = request.getParameter("height");
-		// 2、交给业务层处理
-		biz.downAvatar(nameOrHxid,avatarType,response,width,height);
-	}
-
-	private void updatePassword(HttpServletRequest request, HttpServletResponse response) {
-		// 1、接收参数
-		String username = request.getParameter(I.User.USER_NAME);
-		String password = request.getParameter(I.User.PASSWORD);
-		// 2、交给业务层去处理，返回结果
-		Result result = biz.updatePassword(username,password);
-		// 3、将结果发送到页面
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	private void updateNick(HttpServletRequest request, HttpServletResponse response) {
-		// 1、接收参数
-		String username = request.getParameter(I.User.USER_NAME);
-		String nick = request.getParameter(I.User.NICK);
-		// 2、交给业务层去处理，返回结果
-		Result result = biz.updateNick(username,nick);
-		// 3、将结果发送到页面
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	private void getServerStatus(HttpServletResponse response) {
-		Result result = new Result(true,I.MSG_SUCCESS);
-		// 2、将结果转为json并发送给客户端
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 接收请求的参数
 		String strReq = request.getParameter("request");
 		switch (strReq) {
-		/*// 1、注册请求
-		case I.REQUEST_REGISTER:
-			register(request,response);
-			break;
-		// 6、更新用户或群组头像
-		case I.REQUEST_UPLOAD_AVATAR:
-			updateAvatar(request,response);
-			break;*/
 		// 15、创建群组
 		case I.REQUEST_CREATE_GROUP:
 			createGroup(request,response);
@@ -515,36 +385,6 @@ public class Server extends HttpServlet {
 		Group group = new Group(hxid, name, desc, owner, System.currentTimeMillis()+"", I.GROUP_MAX_USERS_DEFAULT, I.GROUP_AFFILIATIONS_COUNT_DEFAULT, Boolean.parseBoolean(isPublic), Boolean.parseBoolean(allowInvites));
 		Result result = biz.createGroup(group,request);
 		System.out.println("result="+result);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-
-	/**
-	 * 更新用户或群组头像
-	 * @param request
-	 * @param response
-	 */
-	private void updateAvatar(HttpServletRequest request, HttpServletResponse response) {
-		// 1、接收参数
-		String nameOrHxid = request.getParameter(I.NAME_OR_HXID);
-		String avatarType = request.getParameter(I.AVATAR_TYPE);
-		// 2、交给业务层处理
-		Result result = biz.updateAvatar(nameOrHxid,avatarType,request);
-		// 3、将结果返回给客户端
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	private void register(HttpServletRequest request, HttpServletResponse response) {
-		// 1、接收用户传来的参数
-		String username = request.getParameter(I.User.USER_NAME);
-		String password = request.getParameter(I.User.PASSWORD);
-		String nick = request.getParameter(I.User.NICK);
-		System.out.println(username+":"+password+":"+nick);
-		// 2、注册（用户表插入、头像表插入、接收用户上传的图片）
-		// 封装接收参数
-		User user = new User(username,password,nick);
-		Result result = biz.register(user,request);
-		// 3、将注册结果发送给客户端
 		JsonUtil.writeJsonToClient(result, response);
 	}
 

@@ -57,9 +57,9 @@ public class Server extends HttpServlet {
 			updatePassword(request,response);
 			break;*/
 		// 9、下载好友列表，显示全部数据
-		case I.REQUEST_DOWNLOAD_CONTACT_ALL_LIST:
+		/*case I.REQUEST_DOWNLOAD_CONTACT_ALL_LIST:
 			downloadContactAllList(request, response);
-			break;
+			break;*/
 		// 10、下载好友列表，分页显示的数据
 		case I.REQUEST_DOWNLOAD_CONTACT_PAGE_LIST:
 			downloadContactPageList(request, response);

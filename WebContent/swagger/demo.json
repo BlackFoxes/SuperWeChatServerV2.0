@@ -352,6 +352,36 @@
                     }
                 ]
             }
+        },
+        "/addContact": {
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "添加好友",
+                "description": "根据两个用户的用户账号添加为好友关系，增加一条数据。",
+                "author": "cloudream 2016年7月6日10:02:28",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_contact_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_contact_cname",
+                        "in": "query",
+                        "description": "要添加的好友账号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

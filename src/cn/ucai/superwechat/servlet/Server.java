@@ -61,9 +61,9 @@ public class Server extends HttpServlet {
 			downloadContactAllList(request, response);
 			break;*/
 		// 10、下载好友列表，分页显示的数据
-		case I.REQUEST_DOWNLOAD_CONTACT_PAGE_LIST:
+		/*case I.REQUEST_DOWNLOAD_CONTACT_PAGE_LIST:
 			downloadContactPageList(request, response);
-			break;
+			break;*/
 		case I.REQUEST_ADD_CONTACT:
 			// 11、添加好友
 			addContact(request, response);

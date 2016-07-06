@@ -467,14 +467,12 @@
                         "name": "m_user_name",
                         "in": "query",
                         "description": "用户账号",
-                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "m_user_nick",
                         "in": "query",
                         "description": "用户新昵称",
-                        "required": true,
                         "type": "string"
                     },
                     {
@@ -490,6 +488,71 @@
                         "description": "每页数据条数",
                         "required": true,
                         "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/createGroup": {
+            "post": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "创建群组",
+                "description": "根据客户端传来的群组信息及头像，创建群组",
+                "author": "cloudream 2016年7月6日13:56:01",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_hxid",
+                        "in": "query",
+                        "description": "环信ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_group_name",
+                        "in": "query",
+                        "description": "群组名称",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_group_description",
+                        "in": "query",
+                        "description": "群组描述",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_group_owner",
+                        "in": "query",
+                        "description": "群组所有者－用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_group_is_public",
+                        "in": "query",
+                        "description": "是否是公开群",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "m_group_allow_invites",
+                        "in": "query",
+                        "description": "是否可以邀请",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "所要上传的头像",
+                        "required": false,
+                        "type": "file"
                     }
                 ]
             }

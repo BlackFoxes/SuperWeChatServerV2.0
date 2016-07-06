@@ -77,9 +77,9 @@ public class Server extends HttpServlet {
 			findUserByUserName(request, response);
 			break;*/
 		// 14、根据用户名或昵称，模糊分页查询用户列表
-		case I.REQUEST_FIND_USERS_FOR_SEARCH:
+		/*case I.REQUEST_FIND_USERS_FOR_SEARCH:
 			findUsersForSearch(request, response);
-			break;
+			break;*/
 		case I.REQUEST_UPDATE_GROUP_NAME:
 			// 16、更新群组名称
 			updateGroupName(request,response);
@@ -342,50 +342,4 @@ public class Server extends HttpServlet {
 		Result result = biz.downloadGroupMembersPagesByGroupId(groupId,pageId,pageSize);
 		JsonUtil.writeJsonToClient(result, response);		
 	}
-	
-	/**
-	 * 根据用户名或昵称，模糊分页查询用户数据信息
-	 * @param request
-	 * @param response
-	 */
-	private void findUsersForSearch(HttpServletRequest request, HttpServletResponse response) {
-		String userName = request.getParameter(I.User.USER_NAME);
-		String userNick = request.getParameter(I.User.NICK);
-		String pageId = request.getParameter(I.PAGE_ID);
-		String pageSize = request.getParameter(I.PAGE_SIZE);
-		Result result = biz.findUsersForSearch(userName,userNick,pageId,pageSize);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 接收请求的参数
-		String strReq = request.getParameter("request");
-		switch (strReq) {
-		// 15、创建群组
-		case I.REQUEST_CREATE_GROUP:
-			createGroup(request,response);
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/**
-	 * 创建群组
-	 * @param request
-	 * @param response
-	 */
-	private void createGroup(HttpServletRequest request, HttpServletResponse response) {
-		String hxid = request.getParameter(I.Group.HX_ID);
-		String name = request.getParameter(I.Group.NAME);
-		String desc = request.getParameter(I.Group.DESCRIPTION);
-		String owner = request.getParameter(I.Group.OWNER);
-		String isPublic = request.getParameter(I.Group.IS_PUBLIC);
-		String allowInvites = request.getParameter(I.Group.ALLOW_INVITES);
-		Group group = new Group(hxid, name, desc, owner, System.currentTimeMillis()+"", I.GROUP_MAX_USERS_DEFAULT, I.GROUP_AFFILIATIONS_COUNT_DEFAULT, Boolean.parseBoolean(isPublic), Boolean.parseBoolean(allowInvites));
-		Result result = biz.createGroup(group,request);
-		System.out.println("result="+result);
-		JsonUtil.writeJsonToClient(result, response);
-	}
-
 }

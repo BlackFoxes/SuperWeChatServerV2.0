@@ -262,6 +262,36 @@
                     }
                 ]
             }
+        },
+        "/updatePassword":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "更新用户密码",
+                "description": "客户端传来用户名和新密码，服务端根据用户名更新密码为新密码的值",
+                "author": "cloudream 2016年7月6日09:54:24",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_user_password",
+                        "in": "query",
+                        "description": "用户新密码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

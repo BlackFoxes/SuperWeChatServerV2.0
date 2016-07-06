@@ -14,15 +14,18 @@ import cn.ucai.superwechat.biz.SuperWeChatBizImpl;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.JsonUtil;
 
-@WebServlet("/unregister")
-public class UnRegisterServlet extends HttpServlet{
+@WebServlet("/updatePassword")
+public class UpdatePasswordServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private ISuperWeChatBiz  biz = new SuperWeChatBizImpl();
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 接收用户参数
-		String userName = request.getParameter(I.User.USER_NAME);
-		Result result = biz.unRegister(userName);
+		// 1、接收参数
+		String username = request.getParameter(I.User.USER_NAME);
+		String password = request.getParameter(I.User.PASSWORD);
+		// 2、交给业务层去处理，返回结果
+		Result result = biz.updatePassword(username,password);
+		// 3、将结果发送到页面
 		JsonUtil.writeJsonToClient(result, response);
 	}
 }

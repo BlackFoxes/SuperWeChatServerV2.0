@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.ucai.superwechat.biz.ISuperWeChatBiz;
 import cn.ucai.superwechat.biz.SuperWeChatBizImpl;
+import cn.ucai.superwechat.utils.I;
 
 @WebServlet("/downloadAvatar")
 public class DownloadAvatarServlet extends HttpServlet{

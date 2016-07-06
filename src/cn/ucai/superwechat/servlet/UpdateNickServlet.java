@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.biz.ISuperWeChatBiz;
 import cn.ucai.superwechat.biz.SuperWeChatBizImpl;
+import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.JsonUtil;
 
 @WebServlet("/updateNick")

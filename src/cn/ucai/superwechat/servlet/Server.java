@@ -14,6 +14,7 @@ import cn.ucai.superwechat.biz.SuperWeChatBizImpl;
 import cn.ucai.superwechat.pojo.Group;
 import cn.ucai.superwechat.pojo.Location;
 import cn.ucai.superwechat.pojo.User;
+import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.JsonUtil;
 import cn.ucai.superwechat.utils.Utils;
 
@@ -48,9 +49,9 @@ public class Server extends HttpServlet {
 			downloadAvatar(request,response);
 			break;*/
 		// 7、更新用户昵称
-		case I.REQUEST_UPDATE_USER_NICK:
+		/*case I.REQUEST_UPDATE_USER_NICK:
 			updateNick(request,response);
-			break;
+			break;*/
 		// 8、更新用户密码
 		case I.REQUEST_UPDATE_USER_PASSWORD:
 			updatePassword(request,response);

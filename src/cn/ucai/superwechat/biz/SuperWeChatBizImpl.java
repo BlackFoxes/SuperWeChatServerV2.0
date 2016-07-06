@@ -27,7 +27,7 @@ import cn.ucai.superwechat.dao.SuperWeChatDaoImpl;
 import cn.ucai.superwechat.pojo.Group;
 import cn.ucai.superwechat.pojo.Location;
 import cn.ucai.superwechat.pojo.User;
-import cn.ucai.superwechat.servlet.I;
+import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.ImageUtil;
 import cn.ucai.superwechat.utils.PropertiesUtils;
 

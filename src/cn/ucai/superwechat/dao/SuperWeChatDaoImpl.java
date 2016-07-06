@@ -17,8 +17,8 @@ import cn.ucai.superwechat.pojo.Group;
 import cn.ucai.superwechat.pojo.Location;
 import cn.ucai.superwechat.pojo.Member;
 import cn.ucai.superwechat.pojo.User;
-import cn.ucai.superwechat.servlet.I;
 import cn.ucai.superwechat.utils.DBUtils;
+import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.Utils;
 
 public class SuperWeChatDaoImpl implements ISuperWeChatDao {

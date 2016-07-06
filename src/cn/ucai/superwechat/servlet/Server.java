@@ -53,9 +53,9 @@ public class Server extends HttpServlet {
 			updateNick(request,response);
 			break;*/
 		// 8、更新用户密码
-		case I.REQUEST_UPDATE_USER_PASSWORD:
+		/*case I.REQUEST_UPDATE_USER_PASSWORD:
 			updatePassword(request,response);
-			break;
+			break;*/
 		// 9、下载好友列表，显示全部数据
 		case I.REQUEST_DOWNLOAD_CONTACT_ALL_LIST:
 			downloadContactAllList(request, response);

@@ -292,6 +292,29 @@
                     }
                 ]
             }
+        },
+        "/downloadContactAllList":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "下载用户的好友列表的全部数据",
+                "description": "获取指定账号的好友列表全部数据",
+                "author": "cloudream 2016年7月6日10:02:28",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_contact_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

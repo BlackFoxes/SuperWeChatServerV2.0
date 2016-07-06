@@ -68,10 +68,10 @@ public class Server extends HttpServlet {
 			// 11、添加好友
 			addContact(request, response);
 			break;*/
-		case I.REQUEST_DELETE_CONTACT:
+		/*case I.REQUEST_DELETE_CONTACT:
 			// 12、删除好友
 			deleteContact(request, response);
-			break;
+			break;*/
 		// 13、根据用户名查找用户
 		case I.REQUEST_FIND_USER:
 			findUserByUserName(request, response);

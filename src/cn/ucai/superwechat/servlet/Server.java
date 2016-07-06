@@ -64,10 +64,10 @@ public class Server extends HttpServlet {
 		/*case I.REQUEST_DOWNLOAD_CONTACT_PAGE_LIST:
 			downloadContactPageList(request, response);
 			break;*/
-		case I.REQUEST_ADD_CONTACT:
+		/*case I.REQUEST_ADD_CONTACT:
 			// 11、添加好友
 			addContact(request, response);
-			break;
+			break;*/
 		case I.REQUEST_DELETE_CONTACT:
 			// 12、删除好友
 			deleteContact(request, response);

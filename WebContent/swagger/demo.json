@@ -556,6 +556,299 @@
                     }
                 ]
             }
+        },
+        "/updateGroupName":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "更新群组名称",
+                "description": "根据群组ID更新群组名称",
+                "author": "cloudream 2016年7月6日16:53:38",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_group_name",
+                        "in": "query",
+                        "description": "群组新名称",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/addGroupMember":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "添加群成员",
+                "description": "将指定用户添加到指定群中",
+                "author": "cloudream 2016年7月6日17:21:33",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_member_group_hxid",
+                        "in": "query",
+                        "description": "群组环信ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/addGroupMembers":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "批量添加群成员",
+                "description": "将批量用户添加到指定群中",
+                "author": "cloudream 2016年7月6日17:23:08",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_user_name",
+                        "in": "query",
+                        "description": "多个用户的账号，账号之间使用英文逗号分隔",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_member_group_hxid",
+                        "in": "query",
+                        "description": "群组环信ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/downloadGroupMembersByGroupId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组ID下载全部群成员信息",
+                "description": "根据群组ID下载全部群成员信息",
+                "author": "cloudream 2016年7月6日17:36:05",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/downloadGroupMembersPagesByGroupId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组ID分页下载群成员信息",
+                "description": "根据群组ID分页下载群成员信息",
+                "author": "cloudream 2016年7月6日17:39:39",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "string"
+                    }, 
+                    {
+                        "name": "page_id",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer"
+                    }, 
+                    {
+                        "name": "page_size",
+                        "in": "query",
+                        "description": "每页数据条数",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/downloadGroupMembersByHxId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组环信ID下载全部群成员信息",
+                "description": "根据群组环信ID下载全部群成员信息",
+                "author": "cloudream 2016年7月6日17:49:09",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_group_hxid",
+                        "in": "query",
+                        "description": "群组环信ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/downloadGroupMembersPagesByHxId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组环信ID分页下载群成员信息",
+                "description": "根据群组环信ID分页下载群成员信息",
+                "author": "cloudream 2016年7月6日17:51:00",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_group_hxid",
+                        "in": "query",
+                        "description": "群组环信ID",
+                        "required": true,
+                        "type": "string"
+                    }, 
+                    {
+                        "name": "page_id",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer"
+                    }, 
+                    {
+                        "name": "page_size",
+                        "in": "query",
+                        "description": "每页数据条数",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/deleteGroupMember":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "删除单个群成员",
+                "description": "在指定群中删除单个指定群成员",
+                "author": "cloudream 2016年7月6日17:56:56",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "integer"
+                    }, 
+                    {
+                        "name": "m_member_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/deleteGroupMembers":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "删除多个群成员",
+                "description": "在指定群中删除多个指定群成员",
+                "author": "cloudream 2016年7月6日18:00:40",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_member_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "integer"
+                    }, 
+                    {
+                        "name": "m_member_user_name",
+                        "in": "query",
+                        "description": "多个用户账号，账号之间使用英文逗号分隔",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/deleteGroup":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "删除群组",
+                "description": "删除群组，删除群组头像，删除群组所有成员信息",
+                "author": "cloudream 2016年7月6日18:03:04",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

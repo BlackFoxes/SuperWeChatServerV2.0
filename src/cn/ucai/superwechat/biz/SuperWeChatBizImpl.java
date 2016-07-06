@@ -474,12 +474,12 @@ public class SuperWeChatBizImpl implements ISuperWeChatBiz{
 	@Override
 	public Result deleteGroup(String groupId) {
 		Result result = new Result();
+		GroupAvatar ga = dao.findGroupAvatarByGroupId(groupId);
 		if(dao.deleteGroupAndMembers(groupId)){
 			result.setRetMsg(true);
 			result.setRetCode(I.MSG_SUCCESS);
 			// 删除本地硬盘头像信息
-			GroupAvatar ga = dao.findGroupAvatarByGroupId(groupId);
-			deleteAvatar(PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_GROUP_PATH+"/",ga.getMGroupHxid());
+			deleteAvatar(PropertiesUtils.getValue("avatar_path","path.properties")+I.AVATAR_TYPE_GROUP_PATH+"/",ga.getMGroupHxid()+ga.getMAvatarSuffix());
 		}else{
 			result.setRetMsg(false);
 			result.setRetCode(I.MSG_GROUP_DELETE_FAIL);

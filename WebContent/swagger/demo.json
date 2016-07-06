@@ -449,6 +449,50 @@
                     }
                 ]
             }
+        },
+        "/findUsersForSearch":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据用户名或昵称模糊分页查找用户数据",
+                "description": "根据用户名或昵称，模糊分页查询用户数据信息",
+                "author": "cloudream 2016年7月6日13:15:45",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_user_nick",
+                        "in": "query",
+                        "description": "用户新昵称",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page_size",
+                        "in": "query",
+                        "description": "每页数据条数",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

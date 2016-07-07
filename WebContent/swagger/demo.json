@@ -849,6 +849,158 @@
                     }
                 ]
             }
+        },
+        "/findAllGroupByUserName":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "获取指定用户的群组全部数据列表",
+                "description": "获取指定用户的群组列表全部数据，包含公开群组和非公开群组。",
+                "author": "cloudream 2016年7月7日14:13:36",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/findPublicGroups":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "分页下载公开群组列表",
+                "description": "获取所有的公开群组信息，不包括指定用户已经加入进来的公开群组信息",
+                "author": "cloudream 2016年7月7日15:30:26",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer"
+                    }, 
+                    {
+                        "name": "page_size",
+                        "in": "query",
+                        "description": "每页数据条数",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/findGroupByGroupName":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组名称模糊查询群组信息",
+                "description": "根据群组名称模糊查询群组列表全部数据，包含公开群组和非公开群组。",
+                "author": "cloudream 2016年7月7日15:31:25",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_name",
+                        "in": "query",
+                        "description": "群组模糊名称",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/findGroupByGroupId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组ID查找群组信息",
+                "description": "根据群组ID查找群组数据，包括群组信息和头像信息",
+                "author": "cloudream 2016年7月7日15:31:25",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_id",
+                        "in": "query",
+                        "description": "群组ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/findGroupByHxId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组环信ID查找群组信息",
+                "description": "根据群组环信ID查找群组数据，包括群组信息和头像信息",
+                "author": "cloudream 2016年7月7日15:38:02",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_hxid",
+                        "in": "query",
+                        "description": "群组环信ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/findPublicGroupByHxId":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "根据群组环信id查找公开群组",
+                "description": "根据群组环信ID查找群组数据，包括群组信息和头像信息，本接口为在上一个接口的基础上添加了公开的条件",
+                "author": "cloudream 2016年7月7日15:50:06",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_group_hxid",
+                        "in": "query",
+                        "description": "群组环信ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {

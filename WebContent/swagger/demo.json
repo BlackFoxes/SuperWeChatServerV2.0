@@ -940,7 +940,7 @@
                 ],
                 "summary": "根据群组ID查找群组信息",
                 "description": "根据群组ID查找群组数据，包括群组信息和头像信息",
-                "author": "cloudream 2016年7月7日15:31:25",
+                "author": "cloudream 2016年7月7日15:37:45",
                 "produces": [
                     "application/xml",
                     "application/json"
@@ -998,6 +998,124 @@
                         "description": "群组环信ID",
                         "required": true,
                         "type": "string"
+                    }
+                ]
+            }
+        },
+        "/uploadLocation":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "上传用户地理位置信息",
+                "description": "接收用户上传地理位置信息",
+                "author": "cloudream 2016年7月7日16:16:06",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_location_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_location_latitude",
+                        "in": "query",
+                        "description": "地理位置的纬度",
+                        "required": true,
+                        "type": "double"
+                    },
+                    {
+                        "name": "m_location_longitude",
+                        "in": "query",
+                        "description": "地理位置的经度",
+                        "required": true,
+                        "type": "double"
+                    }
+                ]
+            }
+        },
+        "/updateLocation":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "更新用户地理位置信息",
+                "description": "接收用户上传地理位置信息并更新原数据",
+                "author": "cloudream 2016年7月7日16:19:46",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_location_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "m_location_latitude",
+                        "in": "query",
+                        "description": "地理位置的纬度",
+                        "required": true,
+                        "type": "double"
+                    },
+                    {
+                        "name": "m_location_longitude",
+                        "in": "query",
+                        "description": "地理位置的经度",
+                        "required": true,
+                        "type": "double"
+                    },
+                    {
+                        "name": "m_location_is_searched",
+                        "in": "query",
+                        "description": "是否能被搜到",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ]
+            }
+        },
+        "/downloadLocation":{
+            "get": {
+                "tags": [
+                   "superwechat"  
+                ],
+                "summary": "分页下载附近的人",
+                "description": "根据用户账号，查找附近可以被搜索到的用户地理位置数据集合。",
+                "author": "cloudream 2016年7月7日16:22:27",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "m_location_user_name",
+                        "in": "query",
+                        "description": "用户账号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer"
+                    }, 
+                    {
+                        "name": "page_size",
+                        "in": "query",
+                        "description": "每页数据条数",
+                        "required": true,
+                        "type": "integer"
                     }
                 ]
             }
